@@ -1,0 +1,23 @@
+{
+  "name": "content-filter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "content-filter.js",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "entities": "^1.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/magicode/filter-html.git"
+  },
+  "author": "magicode",
+  "bugs": {
+    "url": "https://github.com/magicode/filter-html/issues"
+  },
+  "homepage": "https://github.com/magicode/filter-html"
+}
