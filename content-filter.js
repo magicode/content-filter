@@ -131,6 +131,12 @@ ContentFilter.prototype.json = function(json){
 
 
 ContentFilter.prototype.text = function(text){
+    var $this = this;
     
+    if($this.regex && $this.regex.test(' ' + text + ' ')){
+        return { text: '' };
+    }
+    
+    return { text: text };
 };
 
