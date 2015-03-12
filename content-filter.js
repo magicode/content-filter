@@ -17,9 +17,11 @@ function ContentFilter(options){
 	this.regex = options.regex;
 }
 
-ContentFilter.prototype.html = function(text){
+ContentFilter.prototype.html = function(text ,options){
     
     var $this = this;
+    options  = options || {};
+    
     $ = cheerio.load(text,{decodeEntities: false});
     
     
@@ -50,18 +52,27 @@ ContentFilter.prototype.html = function(text){
     
     var sumall = 0;
     var sumbad = 0;
-    
+    var listRemove = [];
     listtext.forEach(function(item){
         var text = ' ' + entities.decodeHTML($(item.elm).text().trim()) + ' ';
        
         if($this.regex.test(text)){
+            if(options.exportRemove){
+                listRemove.push(text);
+            }
             $(item.elm).remove();
             sumbad += text.length;
         }
         sumall += text.length;
     });
     
-    return { html: $.html({decodeEntities: false}) , remove: sumbad ,length: sumall }   ;
+    var objRet = {};
+    objRet.html =  $.html({decodeEntities: false});
+    objRet.remove =sumbad;
+    objRet.length =sumall;
+    options.exportRemove ? objRet.listRemove = listRemove : 0 ;
+    
+    return objRet;
 };
 
 ContentFilter.prototype.js = function(code){
